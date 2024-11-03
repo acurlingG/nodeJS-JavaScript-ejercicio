@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Productos</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input {
+            margin: 5px 0;
+            padding: 10px;
+            width: 100%;
+            max-width: 300px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Agregar Producto</h1>
+
+<form id="productForm">
+    <input type="text" id="nombre" placeholder="Nombre del producto" required>
+    <input type="number" id="precio" placeholder="Precio" required>
+    <input type="number" id="iva" placeholder="IVA" required>
+    <button type="submit">Agregar Producto</button>
+</form>
+
+<script>
+    document.getElementById('productForm').addEventListener('submit', async (event) => {
+        event.preventDefault(); // Evita que se recargue la página
+
+        const nombre = document.getElementById('nombre').value;
+        const precio = parseFloat(document.getElementById('precio').value);
+        const iva = parseFloat(document.getElementById('iva').value);
+
+        try {
+            // Llama a tu endpoint de Node.js para insertar el producto
+            const response = await axios.post('/insert-product', { nombre, precio, iva });
+            console.log(response.data);
+            alert('Producto agregado exitosamente');
+            // Limpiar campos
+            document.getElementById('productForm').reset();
+        } catch (error) {
+            console.error(error);
+            alert('Error al agregar el producto');
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+
+"type": "module",
+  "scripts": {
+    "dev": "nodemon pruebas.js"   
+  },
+  "dependencies": {
+    "mssql": "^11.0.1"
+  } 
+}
+
